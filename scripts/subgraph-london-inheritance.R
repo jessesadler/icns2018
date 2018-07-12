@@ -49,7 +49,9 @@ nodes <- accounts_london %>%
   left_join(london_credit_l, by = c("id" = "account_id")) %>% 
   left_join(london_debit_l, by = c("id" = "account_id")) %>% 
   mutate(debit.l = if_else(type == "Branch", credit.l, debit.l),
-         color = if_else(type == "Branch", paste("Branch of London", "creditor", sep = "\n"), NA_character_))
+         color = if_else(type == "Branch",
+                         paste("Branch of London", "creditor", sep = "\n"),
+                         NA_character_))
 
 # Create igraph object
 # Creates vertices from inheritances_transactions data
