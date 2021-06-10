@@ -69,10 +69,10 @@ set_graph_style()
 set.seed(240)
 ggraph(wissels, layout = "fr") + 
   geom_edge_fan(aes(edge_alpha = pounds)) + 
-  scale_edge_alpha(labels = scales::dollar_format("£")) + 
+  scale_edge_alpha(labels = scales::dollar_format(prefix = "£")) + 
   geom_node_point(aes(size = credit.l, color = relation), alpha = 0.9) + 
   geom_node_text(aes(label = text)) + 
-  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format("£")) + 
+  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format(prefix = "£")) + 
   labs(size = "Total credit",
        edge_alpha = "Transactions",
        color = "Balance") + 
@@ -88,10 +88,10 @@ ggsave("plots-aans/wissels-credit.png", width = 10, height = 8)
 set.seed(240)
 ggraph(wissels, layout = "fr") + 
   geom_edge_fan(aes(edge_alpha = pounds)) + 
-  scale_edge_alpha(labels = scales::dollar_format("£")) + 
+  scale_edge_alpha(labels = scales::dollar_format(prefix = "£")) + 
   geom_node_point(aes(size = debit.l, color = relation), alpha = 0.9) + 
   geom_node_text(aes(label = text)) + 
-  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format("£")) + 
+  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format(prefix = "£")) + 
   labs(size = "Total debit",
        edge_alpha = "Transactions",
        color = "Balance") + 

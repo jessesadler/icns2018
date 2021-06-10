@@ -6,8 +6,8 @@ library(ggraph)
 library(tidygraph)
 library(debkeepr)
 
-transactions_group <- read_csv("data/transactions_group.csv")
-accounts_group <- read_csv("data/accounts_group.csv")
+transactions_group <- read_csv("data/transactions-group.csv")
+accounts_group <- read_csv("data/accounts-group.csv")
 
 # Create network from groups column in accounts #
 nodes <- deb_debit(transactions_group) %>% 
@@ -39,9 +39,9 @@ set_graph_style()
 set.seed(12)
 ggraph(sterfhuis_groups_tbl, layout = "fr") + 
   geom_edge_fan(aes(edge_alpha = l)) + 
-  scale_edge_alpha(labels = scales::dollar_format("£")) + 
+  scale_edge_alpha(labels = scales::dollar_format(prefix = "£")) + 
   geom_node_point(aes(size = pounds, color = type), alpha = 0.9) + 
-  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format("£")) + 
+  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format(prefix = "£")) + 
   labs(size = "Accumulated Value",
        edge_alpha = "Transactions",
        color = "Account types") + 

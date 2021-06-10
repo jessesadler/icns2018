@@ -1,11 +1,13 @@
+## Circles for opening and closing values ##
+
 library(tidyverse)
 library(debkeepr)
 library(packcircles)
 library(hrbrthemes)
 
 # Use group transactions and accounts
-transactions_group <- read_csv("data/transactions_group.csv")
-accounts_group <- read_csv("data/accounts_group.csv") %>% 
+transactions_group <- read_csv("data/transactions-group.csv")
+accounts_group <- read_csv("data/accounts-group.csv") %>% 
   select(-account, -kinship, -location)
 
 groups_debit <- deb_debit(transactions_group) %>% 
@@ -141,12 +143,23 @@ ggsave("plots-aans/circles-opening.png", width = 10, height = 8)
 ###############################################################################
 
 # Simplify account names that will be used for labels
-accounts$label <- str_replace_all(accounts$label, "Heirs of Maria.*", "Heirs of Maria")
-accounts$label <- str_replace(accounts$label, "Marten della Faille’s.*", "Heirs of Anna de Hane")
-accounts$label <- str_replace(accounts$label, "Jacques, Jan.*", "Jacques, Jan, \n Carlo, and Hester")
-accounts$label <- str_replace(accounts$label, "Branch of Venice new.*", "Branch of Venice \n new account")
-accounts$label <- str_replace(accounts$label, "Marten, Steven.*", "Marten, Steven, \n and Anna")
-accounts$label <- str_replace(accounts$label, "Heirs of Gilles.*",
+accounts$label <- str_replace_all(accounts$label, 
+                                  "Heirs of Maria.*",
+                                  "Heirs of Maria")
+accounts$label <- str_replace(accounts$label, 
+                              "Marten della Faille’s.*",
+                              "Heirs of Anna de Hane")
+accounts$label <- str_replace(accounts$label, 
+                              "Jacques, Jan.*",
+                              "Jacques, Jan, \n Carlo, and Hester")
+accounts$label <- str_replace(accounts$label,
+                              "Branch of Venice new.*",
+                              "Branch of Venice \n new account")
+accounts$label <- str_replace(accounts$label,
+                              "Marten, Steven.*",
+                              "Marten, Steven, \n and Anna")
+accounts$label <- str_replace(accounts$label,
+                              "Heirs of Gilles.*",
                               "Heirs of Gilles Hasebaert \n and Magdalena du Boys")
 
 closing <- deb_open(transactions) %>% 

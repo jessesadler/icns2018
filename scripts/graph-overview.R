@@ -51,9 +51,9 @@ set_graph_style()
 set.seed(240)
 ggraph(sterfhuis_alt, layout = "fr") + 
   geom_edge_fan(aes(edge_alpha = l)) + 
-  scale_edge_alpha(labels = scales::dollar_format("£")) + 
+  scale_edge_alpha(labels = scales::dollar_format(prefix = "£")) + 
   geom_node_point(aes(size = pounds), alpha = 0.7) + 
-  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format("£")) + 
+  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format(prefix = "£")) + 
   labs(size = "Accumulated Value",
        edge_alpha = "Transactions",
        title = "Estate of Jan della Faille de Oude, 1582–1594") + 
@@ -67,9 +67,9 @@ ggsave("plots-aans/sterfhuis-network-bw.png", width = 10, height = 8)
 set.seed(240)
 ggraph(sterfhuis_alt, layout = "fr") + 
   geom_edge_fan(aes(edge_alpha = l)) + 
-  scale_edge_alpha(labels = scales::dollar_format("£")) + 
+  scale_edge_alpha(labels = scales::dollar_format(prefix = "£")) + 
   geom_node_point(aes(size = pounds, color = type), alpha = 0.9) + 
-  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format("£")) + 
+  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format(prefix = "£")) + 
   labs(color = "Account types",
        size = "Accumulated Value",
        edge_alpha = "Transactions",

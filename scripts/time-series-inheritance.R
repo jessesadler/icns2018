@@ -10,7 +10,7 @@ library(dygraphs)
 library(debkeepr)
 library(ggrepel)
 library(hrbrthemes)
-source("scripts/functions/times-series-functions.R")
+source("scripts/times-series-functions.R")
 
 # This script uses tbl-xts functions
 
@@ -74,7 +74,7 @@ ggplot(inheritance1) +
   geom_text(aes(x = date, y = l, label = label),
             nudge_y = 250) + 
   geom_hline(yintercept = 0, size = 1, alpha = 0.8) + 
-  scale_y_continuous(labels = scales::dollar_format("£")) + 
+  scale_y_continuous(labels = scales::dollar_format(prefix = "£")) + 
   scale_x_date(date_breaks = "4 month", date_labels = "%m-%Y",
                expand = c(0.1, 0.1)) + 
   labs(y = NULL, x = NULL, color = "Branches") + 
@@ -101,7 +101,7 @@ ggplot(inheritance2) +
             nudge_y = -50,
             nudge_x = 4) + 
   geom_hline(yintercept = 0, size = 1) + 
-  scale_y_continuous(labels = scales::dollar_format("£")) + 
+  scale_y_continuous(labels = scales::dollar_format(prefix = "£")) + 
   scale_x_date(date_breaks = "1 month", date_labels = "%m-%Y",
                expand = c(0.1, 0.1)) + 
   labs(y = NULL, x = NULL, color = "Branches") + 

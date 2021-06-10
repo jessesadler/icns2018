@@ -8,8 +8,8 @@ library(ggraph)
 library(debkeepr)
 
 # Load data
-transactions_group <- read_csv("data/transactions_group.csv")
-accounts_group <- read_csv("data/accounts_group.csv") %>% 
+transactions_group <- read_csv("data/transactions-group.csv")
+accounts_group <- read_csv("data/accounts-group.csv") %>% 
   select(id, group, type) %>% 
   mutate(group = str_replace(group, "Balance on 8 November",
                              paste("Opening", "balance", sep = "\n")))
@@ -71,10 +71,10 @@ ggraph(branches, layout = "kk") +
   geom_edge_fan(aes(edge_alpha = l),
                 arrow = arrow(length = unit(3, 'mm')), 
                 end_cap = circle(2, 'mm')) + 
-  scale_edge_alpha(labels = scales::dollar_format("£")) + 
+  scale_edge_alpha(labels = scales::dollar_format(prefix = "£")) + 
   geom_node_point(aes(size = credit.l, color = color), alpha = 0.9) + 
   geom_node_text(aes(label = label), repel = TRUE) + 
-  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format("£")) + 
+  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format(prefix = "£")) + 
   labs(size = "Total credit",
        edge_alpha = "Transactions",
        color = "Heirs") + 
@@ -92,10 +92,10 @@ ggraph(branches, layout = "kk") +
   geom_edge_fan(aes(edge_alpha = l),
                 arrow = arrow(length = unit(3, 'mm')), 
                 end_cap = circle(2, 'mm')) + 
-  scale_edge_alpha(labels = scales::dollar_format("£")) + 
+  scale_edge_alpha(labels = scales::dollar_format(prefix = "£")) + 
   geom_node_point(aes(size = debit.l, color = color), alpha = 0.9) + 
   geom_node_text(aes(label = label), repel = TRUE) + 
-  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format("£")) + 
+  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format(prefix = "£")) + 
   labs(size = "Total debit",
        edge_alpha = "Transactions",
        color = "Heirs") + 

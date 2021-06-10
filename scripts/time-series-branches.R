@@ -10,8 +10,8 @@ library(hrbrthemes)
 source("scripts/times-series-functions.R")
 
 # Load data
-transactions_group <- read_csv("data/transactions_group.csv")
-accounts_group <- read_csv("data/accounts_group.csv") %>% 
+transactions_group <- read_csv("data/transactions-group.csv")
+accounts_group <- read_csv("data/accounts-group.csv") %>% 
   select(id, group, type)
 
 branch_accounts <- filter(accounts_group, type == "Branch") %>% 
@@ -40,7 +40,7 @@ branches_tbl <- from_fill_xts(branches_xts) %>%
 ggplot(branches_tbl) + 
   geom_line(aes(x = date, y = l, group = id, color = id), size = 1) + 
   geom_hline(yintercept = 0, size = 1) + 
-  scale_y_continuous(labels = scales::dollar_format("£")) + 
+  scale_y_continuous(labels = scales::dollar_format(prefix = "£")) + 
   scale_x_date(date_breaks = "2 years", date_labels = "%Y") + 
   labs(y = NULL, x = NULL, color = "Branches") + 
   theme_ipsum(base_size = 14) + 
@@ -81,7 +81,7 @@ ggplot(branches1) +
     geom_text(aes(x = date, y = l, label = label),
               nudge_y = -700) + 
   geom_hline(yintercept = 0, size = 1, alpha = 0.8) + 
-  scale_y_continuous(labels = scales::dollar_format("£")) + 
+  scale_y_continuous(labels = scales::dollar_format(prefix = "£")) + 
   scale_x_date(date_breaks = "4 month", date_labels = "%m-%Y",
                expand = c(0.1, 0.1)) + 
   labs(y = NULL, x = NULL, color = "Branches") + 
@@ -96,7 +96,7 @@ ggplot(branches2) +
   geom_text(aes(x = date, y = l, label = label),
             nudge_y = 500) + 
   geom_hline(yintercept = 0, size = 1) + 
-  scale_y_continuous(labels = scales::dollar_format("£")) + 
+  scale_y_continuous(labels = scales::dollar_format(prefix = "£")) + 
   scale_x_date(date_breaks = "1 month", date_labels = "%m-%Y",
                expand = c(0.1, 0.1)) + 
   labs(y = NULL, x = NULL, color = "Branches") + 

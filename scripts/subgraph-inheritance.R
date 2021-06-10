@@ -7,8 +7,8 @@ library(ggraph)
 library(debkeepr)
 
 # Load data
-transactions_group <- read_csv("data/transactions_group.csv")
-accounts_group <- read_csv("data/accounts_group.csv") %>% 
+transactions_group <- read_csv("data/transactions-group.csv")
+accounts_group <- read_csv("data/accounts-group.csv") %>% 
   select(id, group, type) %>% 
   mutate(group = str_replace(group, "Balance on 8 November",
                              paste("Opening", "balance", sep = "\n")))
@@ -98,11 +98,11 @@ inheritance_arc <- graph_from_data_frame(d = transactions_sum,
 ## Node size and labels as debit ##
 ggraph(inheritance_arc, layout = "linear") + 
   geom_edge_arc(aes(edge_alpha = l)) + 
-  scale_edge_alpha(labels = scales::dollar_format("£")) + 
+  scale_edge_alpha(labels = scales::dollar_format(prefix = "£")) + 
   geom_node_point(aes(size = debit.l, color = color), alpha = 0.9) + 
   geom_node_text(aes(label = label_debit),
                  nudge_y = 1.75, nudge_x = 1.75, angle = 45) + 
-  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format("£")) + 
+  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format(prefix = "£")) + 
   labs(size = "Total debit",
        edge_alpha = "Transactions",
        color = "Heirs",
@@ -121,11 +121,11 @@ ggsave("plots-aans/inheritance-arc-network-debit.png", width = 12, height = 8)
 ## Node size and labels as credit ##
 ggraph(inheritance_arc, layout = "linear") + 
   geom_edge_arc(aes(edge_alpha = l)) + 
-  scale_edge_alpha(labels = scales::dollar_format("£")) + 
+  scale_edge_alpha(labels = scales::dollar_format(prefix = "£")) + 
   geom_node_point(aes(size = credit.l, color = color), alpha = 0.9) + 
   geom_node_text(aes(label = label_credit),
                  nudge_y = 2, nudge_x = 2, angle = 45) + 
-  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format("£")) + 
+  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format(prefix = "£")) + 
   labs(size = "Total credit",
        edge_alpha = "Transactions",
        color = "Heirs",

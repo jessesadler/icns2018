@@ -65,10 +65,10 @@ ggraph(london_inheritance, layout = "kk") +
   geom_edge_fan(aes(edge_alpha = l),
                 arrow = arrow(length = unit(3, 'mm')), 
                 end_cap = circle(2, 'mm')) + 
-  scale_edge_alpha(labels = scales::dollar_format("£")) + 
+  scale_edge_alpha(labels = scales::dollar_format(prefix = "£")) + 
   geom_node_point(aes(size = debit.l, color = color), alpha = 0.9) + 
   geom_node_text(aes(label = label), repel = TRUE) + 
-  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format("£")) + 
+  scale_size_continuous(range = c(0.8, 10), labels = scales::dollar_format(prefix = "£")) + 
   labs(size = "Total debit",
        edge_alpha = "Transactions",
        color = NULL) + 

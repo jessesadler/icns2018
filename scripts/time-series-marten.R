@@ -45,7 +45,7 @@ marten_tbl$id <- str_replace_all(marten_tbl$id, "Marten.della.Faille_sororal_2",
 ggplot(marten_tbl) + 
   geom_line(aes(x = date, y = l, group = id, color = id), size = 1) + 
   geom_hline(yintercept = 0, size = 1) + 
-  scale_y_continuous(labels = scales::dollar_format("£")) + 
+  scale_y_continuous(labels = scales::dollar_format(prefix = "£")) + 
   scale_x_date(date_breaks = "2 years", date_labels = "%Y") + 
   labs(y = NULL, x = NULL, color = "Marten's account") + 
   theme_ipsum(base_size = 14) + 
@@ -76,7 +76,7 @@ ggplot(marten1) +
   geom_text_repel(aes(x = date, y = l, label = label),
             nudge_y = 250) + 
   geom_hline(yintercept = 0, size = 1, alpha = 0.8) + 
-  scale_y_continuous(labels = scales::dollar_format("£")) + 
+  scale_y_continuous(labels = scales::dollar_format(prefix = "£")) + 
   scale_x_date(date_breaks = "4 month", date_labels = "%m-%Y",
                expand = c(0.1, 0.1)) + 
   labs(y = NULL, x = NULL, color = "Branches") + 
@@ -97,7 +97,7 @@ ggplot(marten2) +
             nudge_y = -50,
             nudge_x = 4) + 
   geom_hline(yintercept = 0, size = 1) + 
-  scale_y_continuous(labels = scales::dollar_format("£")) + 
+  scale_y_continuous(labels = scales::dollar_format(prefix = "£")) + 
   scale_x_date(date_breaks = "1 month", date_labels = "%m-%Y",
                expand = c(0.1, 0.1)) + 
   labs(y = NULL, x = NULL, color = "Branches") + 

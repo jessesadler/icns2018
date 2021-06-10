@@ -1,5 +1,6 @@
 ## Function to convert running accounts to xts and from xts ##
 
+library(dplyr)
 library(tidyr)
 library(timetk)
 library(xts)
@@ -7,7 +8,7 @@ library(debkeepr)
 
 # Create running accounts by group function takes a transactions data frame and
 # vector of ids to filter by. Returns a running account with group, date, and
-# cumulative sum of denari. Function comes from time-series-branch script.
+# cumulative sum of denarii. Function comes from time-series-branch script.
 # Can also be used as cumulative for single group, such as single heir.
 deb_running <- function(transactions, accounts, label, ids) {
   label <- enquo(label)
@@ -90,5 +91,5 @@ to_fill_xts <- function(df, group = group, current = current) {
 
 from_fill_xts <- function(xts) {
   tbl <- tk_tbl(xts, rename_index = "date")
-  tbl %>% gather(id, current, -date)
+  gather(tbl, id, current, -date)
 }

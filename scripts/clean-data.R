@@ -46,5 +46,15 @@ transactions_group <- transactions %>%
   select(credit, debit, date, l:d) %>% 
   filter(credit != debit) # Remove transactions between the same group
 
-write_csv(accounts_group, "data/accounts_group.csv")
-write_csv(transactions_group, "data/transactions_group.csv")
+write_csv(accounts_group, "data/accounts-group.csv")
+write_csv(transactions_group, "data/transactions-group.csv")
+
+## lsd list column ##
+library(debkeepr)
+
+transactions_lsd <- deb_as_lsd_mutate(transactions, replace = TRUE)
+transactions_lsd_group <- deb_as_lsd_mutate(transactions_group, replace = TRUE)
+
+write_rds(transactions_lsd, "data/transactions-lsd.rds")
+write_rds(transactions_lsd_group, "data/transactions-lsd-group.rds")
+
